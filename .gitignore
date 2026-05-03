@@ -1,0 +1,10 @@
+# Ignore all node_modules anywhere
+node_modules/
+
+# Ignore all env files
+.env
+.env.*
+
+# Optional: ignore build artifacts
+dist/
+build/

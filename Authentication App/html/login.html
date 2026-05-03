@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center h-screen">
+
+  <form id="loginForm" class="bg-gray-800 p-6 rounded w-96 text-white space-y-3">
+    <h2 class="text-xl font-bold">Login</h2>
+
+    <input id="username" class="w-full p-2 bg-gray-700" placeholder="Username" required>
+    <input id="password" type="password" class="w-full p-2 bg-gray-700" placeholder="Password" required>
+
+    <button id="btn" class="w-full bg-green-600 p-2">Login</button>
+
+    <p id="msg" class="text-sm"></p>
+
+    <a href="register.html" class="text-blue-400 text-sm">Create account</a>
+  </form>
+
+  <script src="../js/login.js"></script>
+</body>
+</html>
