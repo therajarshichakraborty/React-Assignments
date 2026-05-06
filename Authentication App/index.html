@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AuthFlow - FreeAPI Auth Module</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <div class="left-panel">
+        <div class="brand">
+          <div class="brand-mark">
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="2"
+                y="2"
+                width="5"
+                height="5"
+                stroke="#e8d5a3"
+                stroke-width="1.2"
+              />
+              <rect
+                x="9"
+                y="2"
+                width="5"
+                height="5"
+                stroke="#e8d5a3"
+                stroke-width="1.2"
+              />
+              <rect
+                x="2"
+                y="9"
+                width="5"
+                height="5"
+                stroke="#e8d5a3"
+                stroke-width="1.2"
+              />
+              <rect x="9" y="9" width="5" height="5" fill="#e8d5a3" />
+            </svg>
+          </div>
+          <span class="brand-name">AuthFlow</span>
+        </div>
+
+        <div class="hero-text">
+          <h1 class="hero-heading">
+            Identity,<br />
+            <em>handled.</em>
+          </h1>
+          <p class="hero-sub">
+            A complete authentication flow built on the FreeAPI module —
+            register, sign in, and manage your session with confidence.
+          </p>
+        </div>
+
+        <div class="endpoints-list">
+          <div class="endpoints-label">API Endpoints</div>
+          <div class="endpoint-item">
+            <span class="method-badge post">POST</span>
+            <span class="endpoint-path">/users/register</span>
+          </div>
+          <div class="endpoint-item">
+            <span class="method-badge post">POST</span>
+            <span class="endpoint-path">/users/login</span>
+          </div>
+          <div class="endpoint-item">
+            <span class="method-badge post">POST</span>
+            <span class="endpoint-path">/users/logout</span>
+          </div>
+          <div class="endpoint-item">
+            <span class="method-badge get">GET</span>
+            <span class="endpoint-path">/users/current-user</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <div class="view active" id="view-login">
+          <div class="view-header">
+            <div class="view-eyebrow">Welcome back</div>
+            <h2 class="view-title">Sign In</h2>
+            <p class="view-subtitle">
+              Enter your credentials to access your account.
+            </p>
+          </div>
+
+          <div id="login-alert" class="alert"></div>
+
+          <div class="field">
+            <label class="field-label" for="login-username">Username</label>
+            <input
+              class="field-input"
+              id="login-username"
+              type="text"
+              placeholder="doejohn"
+              autocomplete="username"
+            />
+          </div>
+          <div class="field">
+            <label class="field-label" for="login-password">Password</label>
+            <input
+              class="field-input"
+              id="login-password"
+              type="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+            />
+          </div>
+
+          <button
+            class="btn btn-primary"
+            id="btn-login"
+            onclick="handleLogin()"
+          >
+            <span class="btn-text">Sign In</span>
+            <div class="spinner"></div>
+          </button>
+
+          <p class="switch-text">
+            No account?
+            <span class="switch-link" onclick="showView('register')"
+              >Create one →</span
+            >
+          </p>
+        </div>
+
+        <div class="view" id="view-register">
+          <div class="view-header">
+            <div class="view-eyebrow">Get started</div>
+            <h2 class="view-title">Create Account</h2>
+            <p class="view-subtitle">Fill in the details below to register.</p>
+          </div>
+
+          <div id="register-alert" class="alert"></div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="reg-username">Username</label>
+              <input
+                class="field-input"
+                id="reg-username"
+                type="text"
+                placeholder="doejohn"
+                autocomplete="username"
+              />
+            </div>
+            <div class="field">
+              <label class="field-label" for="reg-role">Role</label>
+              <select class="field-select" id="reg-role">
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label" for="reg-email">Email</label>
+            <input
+              class="field-input"
+              id="reg-email"
+              type="email"
+              placeholder="user@domain.com"
+              autocomplete="email"
+            />
+          </div>
+          <div class="field">
+            <label class="field-label" for="reg-password">Password</label>
+            <input
+              class="field-input"
+              id="reg-password"
+              type="password"
+              placeholder="••••••••"
+              autocomplete="new-password"
+            />
+          </div>
+          <div class="field">
+            <label class="field-label" for="reg-fullname">Full Name</label>
+            <input
+              class="field-input"
+              id="reg-fullname"
+              type="text"
+              placeholder="John Doe"
+            />
+          </div>
+
+          <button
+            class="btn btn-primary"
+            id="btn-register"
+            onclick="handleRegister()"
+          >
+            <span class="btn-text">Create Account</span>
+            <div class="spinner"></div>
+          </button>
+
+          <p class="switch-text">
+            Already have an account?
+            <span class="switch-link" onclick="showView('login')"
+              >Sign in →</span
+            >
+          </p>
+        </div>
+        <div class="view" id="view-profile">
+          <div class="view-header">
+            <div class="view-eyebrow">Authenticated</div>
+            <h2 class="view-title">Your Profile</h2>
+            <p class="view-subtitle">You are currently signed in.</p>
+          </div>
+
+          <div id="profile-alert" class="alert"></div>
+
+          <div class="profile-card">
+            <div class="profile-banner"></div>
+            <div class="profile-avatar" id="profile-avatar">—</div>
+            <div class="profile-info">
+              <div class="profile-name" id="profile-name">—</div>
+              <div class="profile-username" id="profile-username">@—</div>
+              <div class="profile-fields">
+                <div class="profile-field">
+                  <span class="pf-label">Email</span>
+                  <span class="pf-value" id="profile-email">—</span>
+                </div>
+                <div class="profile-field">
+                  <span class="pf-label">Role</span>
+                  <span class="pf-value"
+                    ><span class="role-badge" id="profile-role">—</span></span
+                  >
+                </div>
+                <div class="profile-field">
+                  <span class="pf-label">Account ID</span>
+                  <span
+                    class="pf-value"
+                    id="profile-id"
+                    style="
+                      font-family: &quot;DM Mono&quot;, monospace;
+                      font-size: 11px;
+                      color: var(--text-muted);
+                    "
+                    >—</span
+                  >
+                </div>
+                <div class="profile-field">
+                  <span class="pf-label">Email Verified</span>
+                  <span class="pf-value" id="profile-verified">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-actions">
+            <button
+              class="btn btn-ghost"
+              id="btn-refresh"
+              onclick="handleGetCurrentUser()"
+            >
+              <span class="btn-text">↻ Refresh</span>
+              <div class="spinner"></div>
+            </button>
+            <button
+              class="btn btn-danger"
+              id="btn-logout"
+              onclick="handleLogout()"
+            >
+              <span class="btn-text">Sign Out</span>
+              <div class="spinner"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
